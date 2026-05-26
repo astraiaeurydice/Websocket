@@ -1,0 +1,20 @@
+# Nixpacks config for Railway: PHP + Composer
+
+[variables]
+COMPOSER_ALLOW_SUPERUSER = "1"
+
+[phases.setup]
+nixPkgs = [
+  "php82",
+  "php82Packages.composer",
+  "php82Extensions.curl",
+  "php82Extensions.mbstring",
+  "php82Extensions.openssl"
+]
+
+[phases.install]
+cmds = ["COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-interaction"]
+
+[start]
+cmd = "php websocket-server.php start"
+

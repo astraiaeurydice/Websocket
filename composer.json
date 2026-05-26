@@ -1,0 +1,9 @@
+{
+  "name": "kpop/ws-server",
+  "description": "Workerman WebSocket server for Kpop (Railway service)",
+  "type": "project",
+  "require": {
+    "workerman/workerman": "^5.2"
+  }
+}
+

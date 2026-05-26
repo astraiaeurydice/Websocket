@@ -1,0 +1,9 @@
+# Railway deploy config for the WebSocket server service
+
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "php websocket-server.php start"
+restartPolicyType = "ON_FAILURE"
+
