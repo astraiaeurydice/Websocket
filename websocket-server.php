@@ -191,6 +191,19 @@ $wsWorker->onWorkerStart = function () use (&$clients, $internalHost, $internalP
             return;
         }
 
+        if (!empty($body['broadcast']) && is_array($body['payload'] ?? null)) {
+            $payload = $body['payload'];
+            $encoded = json_encode($payload, JSON_THROW_ON_ERROR);
+            $sent = 0;
+            foreach ($clients as $client) {
+                $client->send($encoded);
+                ++$sent;
+            }
+            sendJsonResponse($connection, ['status' => 'broadcast', 'sent' => $sent]);
+
+            return;
+        }
+
         $userId = $body['userId'] ?? null;
         $payload = $body['payload'] ?? null;
 
